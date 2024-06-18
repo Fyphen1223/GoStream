@@ -31,6 +31,7 @@ func handle(w http.ResponseWriter, r *http.Request) (){
 	}
 
 	handle404(w);
+	return;
 }
 
 func validateRequest(w http.ResponseWriter, r *http.Request) (bool){
@@ -46,6 +47,7 @@ func validateRequest(w http.ResponseWriter, r *http.Request) (bool){
 func handle404 (w http.ResponseWriter) (){
 	w.WriteHeader(http.StatusNotFound);
 	fmt.Fprint(w, "Not Found");
+	return;
 };
 
 func loadTracks(w http.ResponseWriter, r *http.Request) (){
@@ -53,11 +55,16 @@ func loadTracks(w http.ResponseWriter, r *http.Request) (){
 		handelIllegalMethod(w);
 		return;
 	}
+
 	identifier := r.URL.Query().Get("identifier");
 	fmt.Fprint(w, "This is your identifier:" + identifier);
-}
+
+
+	return;
+};
 
 func handelIllegalMethod(w http.ResponseWriter) (){
 	w.WriteHeader(http.StatusMethodNotAllowed);
 	fmt.Fprint(w, "Method Not Allowed");
+	return;
 }
